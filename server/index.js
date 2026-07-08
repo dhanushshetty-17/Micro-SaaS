@@ -29,7 +29,12 @@ app.post("/login", async (req, res) => {
     const user = result.rows[0];
 
     // Step 3: Check password
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isMatch) {
       return res.json({
         success: false,
         message: "Invalid password",
@@ -56,6 +61,18 @@ app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+
+    const existingUser = await pool.query(
+      "SELECT * FROM users WHERE email = $1",
+      [email]
+    );
+
+    if (existingUser.rows.length > 0) {
+      return res.json({
+      success: false,
+      message: "Email already exists",
+      });
+    }
     // Step 1: Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -86,3 +103,4 @@ const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
