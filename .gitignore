@@ -4,5 +4,6 @@
 **/coverage/
 **/*.tsbuildinfo
 .env*
+.env
 .vercel
 *.pem

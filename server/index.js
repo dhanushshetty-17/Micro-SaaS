@@ -1,3 +1,5 @@
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const pool = require("./config/db");
 const express = require("express");
@@ -42,10 +44,22 @@ app.post("/login", async (req, res) => {
     }
 
     // Step 4: Login successful
-    return res.json({
-      success: true,
-      message: "Login Successful",
-    });
+      const token = jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+
+  return res.json({
+    success: true,
+    message: "Login Successful",
+    token: token,
+  });
 
   } catch (error) {
     console.error(error);
