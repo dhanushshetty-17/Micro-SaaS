@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { API_URL } from "@/lib/api";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -24,7 +25,7 @@ export default function RegisterPage() {
           onSubmit={async (e) => {
             e.preventDefault();
 
-            const response = await fetch("http://localhost:5000/register", {
+            const response = await fetch(`${API_URL}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -81,9 +82,6 @@ export default function RegisterPage() {
         </p>
         )}
         </form>
-        <p className="mt-4 text-green-500">
-            You typed: {email}
-        </p>
       </div>
     </main>
   );
