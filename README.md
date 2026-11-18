@@ -8,7 +8,6 @@ A full-stack invoice tracker with JWT authentication, PostgreSQL, PDF invoices, 
 - **API:** Express on Node.js
 - **Database:** PostgreSQL
 - **Authentication:** JWT tokens and bcrypt password hashing
-- **Payments:** Stripe Checkout and signed webhooks
 - **Deployment:** Docker Compose
 
 The browser talks to the Express API. The API owns database access and checks `user_id` from the verified JWT, so a client cannot select another user's invoices by changing a request body.
