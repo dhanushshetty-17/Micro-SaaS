@@ -4,7 +4,7 @@ A full-stack invoice tracker with JWT authentication, PostgreSQL, PDF invoices, 
 
 ## Architecture
 
-- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
+- **Frontend:** Next.js, React , CSS 
 - **API:** Express on Node.js
 - **Database:** PostgreSQL
 - **Authentication:** JWT tokens and bcrypt password hashing
